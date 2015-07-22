@@ -7,7 +7,7 @@
 # Version 1.0
 
 # Use Docker's nodejs, which is based on ubuntu
-FROM dockerfile/nodejs
+FROM dockerfile/iojs
 MAINTAINER John E. Arnold, iohannes.eduardus.arnold@gmail.com
 
 # Get Etherpad-lite's other dependencies
@@ -16,6 +16,8 @@ RUN apt-get install -y gzip git-core curl python libssl-dev pkg-config build-ess
 
 # Grab the latest Git version
 RUN cd /opt && git clone git://github.com/ether/etherpad-lite.git etherpad
+WORKDIR /opt/etherpad
+RUN git checkout development
 
 # Install node dependencies
 RUN /opt/etherpad/bin/installDeps.sh
